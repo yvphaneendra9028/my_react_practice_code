@@ -19,7 +19,7 @@ function Navbar(){
             </div>
 
 
-            <div className="menu">
+            <div className="menu nav-links">
 
 
                 {

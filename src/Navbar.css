@@ -1,85 +1,26 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
 
-    height:60px;
+  width: 100%;
+  height: 60px;
 
-    background:#1f2937;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    display:flex;
+  padding: 0 20px;
 
-    align-items:center;
+  background-color: white;
+  z-index: 1000;
 
-    justify-content:space-between;
-
-    padding:0 40px;
-
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-
-.logo {
-
-    color:white;
-
-    font-size:22px;
-
-    font-weight:bold;
-
-}
-
-
-.menu {
-
-    display:flex;
-
-    align-items:center;
-
-    gap:25px;
-
-}
-
-
-
-.menu a {
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:16px;
-
-}
-
-
-
-.menu a:hover {
-
-    color:#60a5fa;
-
-}
-
-
-
-.logout-btn {
-
-    background:#ef4444;
-
-    color:white;
-
-    border:none;
-
-    padding:8px 18px;
-
-    border-radius:5px;
-
-    cursor:pointer;
-
-    font-size:15px;
-
-}
-
-
-
-.logout-btn:hover {
-
-    background:#dc2626;
-
+.menu{
+    margin-right:38px;
+}.nav-links {
+  display: flex;
+  gap: 20px;
 }
