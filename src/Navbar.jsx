@@ -38,20 +38,7 @@ function Navbar(){
                         </Link>
 
 
-                        <Link to="/users">
-                            Users
-                        </Link>
-
-
-                        <Link to="/products">
-                            Products
-                        </Link>
-
-
-                        <Link to="/profile">
-                            Profile
-                        </Link>
-
+                        
 
                         <button 
                             className="logout-btn"
