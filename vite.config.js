@@ -14,6 +14,6 @@ export default defineConfig({
         })
 
     ],
-    base: '/my_react_practice_code/'
+    
 
 });
