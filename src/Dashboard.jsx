@@ -1,6 +1,6 @@
 import React ,{Suspense,lazy , useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import Form from "./Form";
+import Form from "./form";
 import UserSearch from "./UserSearch";
 import Data_pagination from "./Data_pagination";
 import Card from "./components/Card";
