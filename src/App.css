@@ -3,6 +3,7 @@ body {
     padding: 20px;
     background: #f4f4f4;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-y:auto
 }
 
 .container {

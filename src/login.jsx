@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./hooks/AuthContext";
 import "./Login.css";
@@ -44,12 +44,18 @@ function Login(){
         navigate("/dashboard");
 
     }
+ useEffect(() => {
+    document.body.classList.add("login-body");
 
+    return () => {
+      document.body.classList.remove("login-body");
+    };
+  }, []);
 
 
     return(
 
-        <div className="login-wrapper">
+        <div className="login-wrapper login-body" >
 
 
             <div className="login-box">
