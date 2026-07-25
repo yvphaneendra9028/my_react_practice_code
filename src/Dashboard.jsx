@@ -1,4 +1,4 @@
-import React ,{Suspense,lazy , useContext} from "react";
+import React ,{Suspense,lazy , useState,useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "./form";
 import UserSearch from "./UserSearch";
@@ -11,6 +11,7 @@ import ChangeTheme from "./ChangeTheme";
 import MultiStepForm from "./multistepForm";
 const Users = lazy(() => import("./Users"));
 import { AuthContext } from "./hooks/AuthContext";
+import ChildtoParentComponent from "./ChildtoParentComponent";
 
 
 function Dashboard(){
@@ -23,14 +24,15 @@ function Dashboard(){
 
         }
 
+    const [childData, setChildData] = useState("");
+    const receiveData = (data) => {
+    setChildData(data);
+    };
+
     return(
 
         <>
-    
-       
-
-
-        <h1>React Concepts</h1>
+     <h1>React Concepts</h1>
 
 
             <div className="card">
@@ -132,6 +134,16 @@ function Dashboard(){
 
                 <MultiStepForm />
 
+            </div>
+
+            <div className="card">
+                {childData && <p>Data from Child: {childData}</p>}
+                <p>Create Child Component add useState hook and setData take a button write onclick function
+                    and pass the data in the function as props.</p>
+                    <p>Now in parent component take another useState hook and create function with props function and set data as parameter
+                    and display the data in parent component . 
+                </p>
+                <ChildtoParentComponent sendDataToParent={receiveData}/>
             </div>
         </>
     )
