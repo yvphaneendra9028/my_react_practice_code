@@ -6,6 +6,7 @@ function ChangeTheme(){
     const {theme,toggleTheme} = useContext(ContextTheme);
     return(
         <>
+        <h2>Change Theme using Context API</h2>
                 <h2>{theme}</h2>
         <button onClick={toggleTheme}>Change Theme</button>
 

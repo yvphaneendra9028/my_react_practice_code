@@ -4,7 +4,6 @@ import Form from "./form";
 import UserSearch from "./UserSearch";
 import Data_pagination from "./Data_pagination";
 import Card from "./components/Card";
-
 import User_crud from "./User_crud";
 import ParentComponent from "./ParentComponent";
 import ChangeTheme from "./ChangeTheme";
@@ -32,6 +31,8 @@ function Dashboard(){
     return(
 
         <>
+
+        <br/><br/>
      <h1>React Concepts</h1>
 
 
