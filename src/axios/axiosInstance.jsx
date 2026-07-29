@@ -2,7 +2,7 @@ import axios from "axios";
 
 
  const apiAxios = axios.create({
- https://my-react-practice-code.onrender.com/api
+ https://my-react-practice-code.onrender.com/api,
   withCredentials: true,
 });
 
