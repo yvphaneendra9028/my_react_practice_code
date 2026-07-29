@@ -6,6 +6,7 @@ import { loginUser} from "./services/userService";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import Register from "./Register";
+import { toast } from "react-toastify";
 
 
 function Login(){
@@ -73,13 +74,21 @@ function Login(){
             const response = await loginUser(form);
             console.log("Login response:", response.data);
             login(response.data.user);
+             
             navigate("/dashboard");
+            toast.success("Logged in Successfully");
         } 
         catch (error) {
             console.log(
                 error.response?.data?.message || "Login failed",
                 error
             );
+            toast.success(error.response?.data?.message || "Login failed",
+                error);
+                setForm({
+                    email:'',
+                password:''     
+            })
         }
     };
 

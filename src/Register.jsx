@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./hooks/AuthContext";
 import { registerUser} from "./services/userService";
 import "./Login.css";
-
+import { toast } from "react-toastify";
 
 function Register(){
 
@@ -64,6 +64,9 @@ if(validationErrors){
         const response = await registerUser(form);
         const resp = response.data;
         console.log('response--------------------',resp);
+
+        toast.success("Registration Successful");
+        
 
 // reset form fields
         setForm({

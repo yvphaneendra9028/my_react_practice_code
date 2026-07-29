@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./hooks/AuthContext";
 import Navbar from "./Navbar";
+import { ToastContainer } from "react-toastify";
+
 
 
 function App() {
@@ -17,6 +19,11 @@ function App() {
             <Navbar />
 
             <AppRoutes />
+             <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+      />
 
         </ErrorBoundary>
     );
