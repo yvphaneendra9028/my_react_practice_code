@@ -1,7 +1,10 @@
-import axios from 'axios';
-const api = axios.create({
-    baseURL:'https://jsonplaceholder.typicode.com'
+import axios from "axios";
 
-})
 
-export default api;
+ const apiAxios = axios.create({
+  baseURL: "http://localhost:5000/api",
+  withCredentials: true,
+});
+
+// Default export
+export default apiAxios;

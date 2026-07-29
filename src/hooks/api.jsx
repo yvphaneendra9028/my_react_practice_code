@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import apiInstance from "../axios/axiosInstance";
+import api from "../axios/api_global";
 
 function useApi(){
 const[loading,setLoading] = useState(false);
@@ -8,7 +8,7 @@ const[data,setData] = useState([]);
 
 const fetchData=async(url)=> {
      try{
-             const response=  await apiInstance.get(url);
+             const response=  await api.get(url);
             setData(response.data);
      }catch(error){
         console.log(error);

@@ -1,22 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { AuthContext } from "./hooks/AuthContext";
+
+import { loginUser} from "./services/userService";
 import "./Login.css";
+import { Link } from "react-router-dom";
+import Register from "./Register";
 
 
 function Login(){
 
     const [form,setForm] = useState({
-        username:'',
+        email:'',
         password:''
     });
+    const [errors,setErrors] = useState({})
 
+    const { login  } = useContext(AuthContext);
 
     const navigate = useNavigate();
-
-    const { login } = useContext(AuthContext);
-
-
 
     const handleFields=(e)=>{
 
@@ -26,24 +28,61 @@ function Login(){
             ...prev,
             [name]:value
         }));
+        setErrors((prev)=>({
+        ...prev,
+        [name]:""
+    }));
 
     }
 
+    const validateForm = () => {
+
+    let newErrors = {};
+
+    if (!form.email.trim()) {
+        newErrors.email = "Email is required";
+    } 
+    else if (!/\S+@\S+\.\S+/.test(form.email)) {
+        newErrors.email = "Enter a valid email";
+    }
 
 
-    const handleSubmit=(e)=>{
+    if (!form.password.trim()) {
+        newErrors.password = "Password is required";
+    }
+    
 
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+};
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(form);
+         const isValid = validateForm();
 
-
-        login("1234567890");
-
-
-        navigate("/dashboard");
-
+    if(!isValid){
+        return;
     }
+
+        try {
+
+            const response = await loginUser(form);
+            console.log("Login response:", response.data);
+            login(response.data.user);
+            navigate("/dashboard");
+        } 
+        catch (error) {
+            console.log(
+                error.response?.data?.message || "Login failed",
+                error
+            );
+        }
+    };
+
  useEffect(() => {
     document.body.classList.add("login-body");
 
@@ -56,61 +95,31 @@ function Login(){
     return(
 
         <div className="login-wrapper login-body" >
-
-
             <div className="login-box">
+                <h2>Login</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Email</label>
 
+                            <input type="text" name="email" value={form.email} onChange={handleFields} 
+                            placeholder="Enter email"/>
 
-                <h2>
-                    Login
-                </h2>
+                            {errors.email && (<span className="error">{errors.email}</span>)}
 
+                        </div>
+                        <div className="form-group">
 
-                <form onSubmit={handleSubmit}>
+                        <label>Password</label>
 
+                            <input type="password" name="password" value={form.password} onChange={handleFields}
+                            placeholder="Enter password"/>
+                            {errors.password && (<span className="error">{errors.password}</span>)}
 
-                    <div className="form-group">
-
-                        <label>
-                            Username
-                        </label>
-
-                        <input
-                        type="text"
-                        name="username"
-                        value={form.username}
-                        onChange={handleFields}
-                        placeholder="Enter username"
-                        />
-
-                    </div>
-
-
-
-                    <div className="form-group">
-
-                        <label>
-                            Password
-                        </label>
-
-                        <input
-                        type="password"
-                        name="password"
-                        value={form.password}
-                        onChange={handleFields}
-                        placeholder="Enter password"
-                        />
-
-                    </div>
-
-
-
-                    <button type="submit" className="loginbutton">
-                        Login
-                    </button>
-
-
-                </form>
+                        </div>
+                        <button type="submit" className="loginbutton">Login</button>
+                        <br/><br/>
+                            <div>Already have an account? <Link to="/register">Register</Link></div>  
+                        </form>
 
 
             </div>

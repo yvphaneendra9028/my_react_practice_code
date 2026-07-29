@@ -4,16 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import ContextAPI from "./hooks/contextAPI";
-import AuthProvider from "./hooks/AuthContext";
+import AuthProvider from './hooks/AuthContext'
 
 createRoot(document.getElementById("root")).render(
-    <BrowserRouter>
-    <AuthProvider>
-      <ContextAPI>
+   <BrowserRouter>
+        <AuthProvider>
+          <ContextAPI>
             <App />
-  </ContextAPI>
-
-    </AuthProvider>
-
-  </BrowserRouter>
+          </ContextAPI>
+        </AuthProvider>
+    </BrowserRouter>
 );

@@ -8,9 +8,7 @@ import Navbar from "./Navbar";
 
 function App() {
 
-    const { token } = useContext(AuthContext);
-
-    console.log("token----------------------", token);
+   
 
 
     return (

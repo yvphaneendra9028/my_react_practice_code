@@ -1,20 +1,31 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../hooks/AuthContext";
 
 
-function ProtectedRoutes({ children }) {
+function ProtectedRoutes({ allowedRoles }) {
 
-    const { token } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+
+    console.log("Protected User:", user);
+    console.log("Allowed Roles:", allowedRoles);
 
 
-    if (!token) {
+    if (!user) {
         return <Navigate to="/login" replace />;
     }
 
 
-    return children;
-}
+    if (
+        allowedRoles &&
+        !allowedRoles.includes(user.role)
+    ) {
+        console.log("Role blocked");
+        return <Navigate to="/dashboard" replace />;
+    }
 
+
+    return <Outlet />;
+}
 
 export default ProtectedRoutes;

@@ -14,14 +14,14 @@ import ChildtoParentComponent from "./ChildtoParentComponent";
 
 
 function Dashboard(){
-    const navigate = useNavigate();
-       const { logout } = useContext(AuthContext);
-        const handleLogout =()=> {
-              logout();
-
+   const handleLogout = async () => {
+    try {
+        await logout();
         navigate("/");
-
-        }
+    } catch(error) {
+        console.log(error);
+    }
+};
 
     const [childData, setChildData] = useState("");
     const receiveData = (data) => {
