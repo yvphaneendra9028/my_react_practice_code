@@ -4,6 +4,7 @@ import { AuthContext } from "./hooks/AuthContext";
 import { registerUser} from "./services/userService";
 import "./Login.css";
 import { toast } from "react-toastify";
+import Loader from "./components/Loader";
 
 function Register(){
 
@@ -14,7 +15,7 @@ function Register(){
     });
 
     const [errors,setErrors] = useState({});
-
+    const [loading,setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -61,10 +62,11 @@ if(validationErrors){
 }
 
     try {
+        setLoading(true);
         const response = await registerUser(form);
         const resp = response.data;
         console.log('response--------------------',resp);
-
+        setLoading(false);
         toast.success("Registration Successful");
         
 
@@ -87,6 +89,10 @@ if(validationErrors){
       document.body.classList.remove("login-body");
     };
   }, []);
+
+  if(loading){
+     <Loader/>
+  }
 
 
     return(

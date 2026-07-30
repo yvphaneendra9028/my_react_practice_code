@@ -6,5 +6,7 @@ import axios from "axios";
   withCredentials: true,
 });
 
+//baseURL: "https://my-react-practice-code.onrender.com/api",
+
 // Default export
 export default apiAxios;

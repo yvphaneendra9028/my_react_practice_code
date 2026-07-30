@@ -7,6 +7,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import Register from "./Register";
 import { toast } from "react-toastify";
+import Loader from "./components/Loader";
 
 
 function Login(){
@@ -16,7 +17,7 @@ function Login(){
         password:''
     });
     const [errors,setErrors] = useState({})
-
+    const [loading, setLoading] = useState(false);
     const { login  } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -70,11 +71,11 @@ function Login(){
     }
 
         try {
-
+            setLoading(true);
             const response = await loginUser(form);
             console.log("Login response:", response.data);
             login(response.data.user);
-             
+             setLoading(false);
             navigate("/dashboard");
             toast.success("Logged in Successfully");
         } 
@@ -99,7 +100,9 @@ function Login(){
       document.body.classList.remove("login-body");
     };
   }, []);
-
+     if (loading) {
+    return <Loader />;
+  }
 
     return(
 

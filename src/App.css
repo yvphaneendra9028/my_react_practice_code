@@ -24,4 +24,9 @@ body {
     margin-top: 0;
     margin-bottom: 15px;
     color: #333;
+}.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
 }
