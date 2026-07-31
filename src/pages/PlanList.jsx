@@ -73,7 +73,8 @@ function PlansList() {
   };
 
   return (
-    <div className="plans-container">
+  <><br></br><br></br><br></br><br></br>
+    <div className="plans-container card">
 
       <h2>Plan List</h2>
 
@@ -163,7 +164,7 @@ function PlansList() {
         <p>No plans found for this product.</p>
       )}
 
-    </div>
+    </div></>
   );
 }
 
