@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 
 const connectDB = require("./config/database");
 const userRoutes = require("./route/user");
+const productRoutes = require('./route/product');
+const planRoutes = require('./route/plan');
 
 // Load environment variables
 dotenv.config();
@@ -45,6 +47,8 @@ app.get("/", (req, res) => {
 
 // User routes
 app.use("/api/users", userRoutes);
+app.use("/api/products",productRoutes);
+app.use('/api/plans',planRoutes);
 
 
 // 404 Handler

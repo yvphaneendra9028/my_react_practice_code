@@ -30,3 +30,90 @@ body {
   align-items: center;
   min-height: 200px;
 }
+.plans-container {
+  width: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.plans-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Table wrapper */
+.plans-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Header */
+.plans-table thead {
+  background: #f8fafc;
+}
+
+.plans-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+/* Body */
+.plans-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+/* Right align money */
+.plans-table th:nth-child(3),
+.plans-table th:nth-child(4),
+.plans-table td:nth-child(3),
+.plans-table td:nth-child(4) {
+  text-align: right;
+}
+
+/* Hover */
+.plans-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Status */
+.status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .plans-container {
+    padding: 15px;
+    overflow-x: auto;
+  }
+
+  .plans-table {
+    min-width: 750px;
+  }
+
+}

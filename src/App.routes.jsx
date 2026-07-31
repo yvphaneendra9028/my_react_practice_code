@@ -9,16 +9,16 @@ import { Route, Routes, Link,Navigate } from "react-router-dom";
 import Register from "./Register";
 import Product from "./pages/Product";
 import Orders from "./pages/Orders";
+import ProductsList from "./pages/ProductsList";
+import PlanForm from "./pages/Plan";
+import PlanList from "./pages/PlanList";
 
 function Approutes(){
    
     return(
         <>
-        
-               <div className="container">
-
-
-           <Routes>
+        <div className="container">
+            <Routes>
 
     <Route 
         path="/" 
@@ -53,6 +53,19 @@ function Approutes(){
         <Route 
             path="/products" 
             element={<Product />} 
+        />
+         <Route 
+            path="/productList" 
+            element={<ProductsList/>} 
+        />
+        <Route 
+            path="/plan" 
+            element={<PlanForm/>} 
+        />
+
+             <Route 
+            path="/planList" 
+            element={<PlanList/>} 
         />
 
     </Route>

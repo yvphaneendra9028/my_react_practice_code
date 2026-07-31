@@ -1,192 +1,286 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext,useState,useRef,useEffect } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { AuthContext } from "./hooks/AuthContext";
 import "./Navbar.css";
-
 
 function Navbar() {
 
     const { user, logout } = useContext(AuthContext);
 
-    const [showDropdown,setShowDropdown] = useState(false);
+    const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+    const [openMenu, setOpenMenu] = useState(null);
 
     const dropdownRef = useRef();
 
     const navigate = useNavigate();
 
-
-
-    const handleLogout = ()=>{
+    // Logout
+    const handleLogout = () => {
 
         logout();
 
-        setShowDropdown(false);
+        setShowProfileDropdown(false);
 
         navigate("/login");
-
-    }
-
+    };
 
 
-    // close dropdown when clicking outside
-    useEffect(()=>{
+    // Toggle submenu
+    const toggleMenu = (menuName) => {
 
-        const handleClickOutside=(event)=>{
+        setOpenMenu(prev =>
+            prev === menuName ? null : menuName
+        );
+    };
 
-            if(
+
+    // Close profile dropdown when clicking outside
+    useEffect(() => {
+
+        const handleClickOutside = (event) => {
+
+            if (
                 dropdownRef.current &&
                 !dropdownRef.current.contains(event.target)
-            ){
-
-                setShowDropdown(false);
-
+            ) {
+                setShowProfileDropdown(false);
             }
-
-        }
-
+        };
 
         document.addEventListener(
             "mousedown",
             handleClickOutside
         );
 
-
-        return ()=>{
+        return () => {
 
             document.removeEventListener(
                 "mousedown",
                 handleClickOutside
             );
 
-        }
+        };
 
-
-    },[]);
-
+    }, []);
 
 
     return (
 
         <nav className="navbar">
 
+            {/* Logo */}
 
-            <div className="logo">
-                React Practice Code
-            </div>
-
+            React Pro    
 
 
             {
-            user ? (
+                user ? (
 
-                <div className="nav-right">
+                    <div className="nav-right">
 
+                        {/* Welcome */}
 
-                    <div className="welcome-message">
-                        Welcome, {user.username}
-                    </div>
-
-
-
-                    <div className="menu nav-links">
+                        <div className="welcome-message">
+                            Welcome, {user.username}
+                        </div>
 
 
-                    {
-                    user.role === "user" && (
-                        <>
-                            <Link to="/dashboard">
-                                Dashboard
-                            </Link>
+                        {/* Navigation */}
+
+                        <div className="menu nav-links">
 
 
-                            <Link to="/orders">
-                                Orders
-                            </Link>
-                        </>
-                    )
-                    }
+                            {/* USER MENU */}
 
+                            {
+                                user.role === "user" && (
+                                    <>
+                                        <Link to="/dashboard">
+                                            Dashboard
+                                        </Link>
 
-
-                    {
-                    user.role === "admin" && (
-
-                        <Link to="/products">
-                            Products
-                        </Link>
-
-                    )
-                    }
+                                        <Link to="/orders">
+                                            Orders
+                                        </Link>
+                                    </>
+                                )
+                            }
 
 
 
-                    {/* Profile Image */}
+                            {/* ADMIN MENU */}
 
-                    <div 
-                    className="profile-container"
-                    ref={dropdownRef}
-                    >
-
-                        <img
-                        src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                        className="profile-image"
-                        alt="profile"
-                        onClick={()=>
-                            setShowDropdown(prev=>!prev)
-                        }
-                        />
+                            {
+                                user.role === "admin" && (
+                                    <>
 
 
+                                        {/* PRODUCTS MENU */}
 
-                        {
-                        showDropdown && (
+                                        <div className="nav-menu">
 
-                            <div className="profile-dropdown">
+                                            <button
+                                                className="menu-button"
+                                                onClick={() =>
+                                                    toggleMenu("products")
+                                                }
+                                            >
+                                                Products ▾
+                                            </button>
 
-                                <p>
-                                    {user.username}
-                                </p>
+
+                                            {
+                                                openMenu === "products" && (
+
+                                                    <div className="submenu">
+
+                                                        <Link
+                                                            to="/products"
+                                                            onClick={() =>
+                                                                setOpenMenu(null)
+                                                            }
+                                                        >
+                                                            Add Product
+                                                        </Link>
 
 
-                                <button
-                                onClick={handleLogout}
-                                >
-                                    Logout
-                                </button>
+                                                        <Link
+                                                            to="/productList"
+                                                            onClick={() =>
+                                                                setOpenMenu(null)
+                                                            }
+                                                        >
+                                                            Product List
+                                                        </Link>
 
+                                                    </div>
+
+                                                )
+                                            }
+
+                                        </div>
+
+
+
+                                        {/* PLANS MENU */}
+
+                                        <div className="nav-menu">
+
+                                            <button
+                                                className="menu-button"
+                                                onClick={() =>
+                                                    toggleMenu("plans")
+                                                }
+                                            >
+                                                Plans ▾
+                                            </button>
+
+
+                                            {
+                                                openMenu === "plans" && (
+
+                                                    <div className="submenu">
+
+                                                        <Link
+                                                            to="/plan"
+                                                            onClick={() =>
+                                                                setOpenMenu(null)
+                                                            }
+                                                        >
+                                                            Add Plan
+                                                        </Link>
+
+
+                                                        <Link
+                                                            to="/planList"
+                                                            onClick={() =>
+                                                                setOpenMenu(null)
+                                                            }
+                                                        >
+                                                            Plan List
+                                                        </Link>
+
+                                                    </div>
+
+                                                )
+                                            }
+
+                                        </div>
+
+
+                                    </>
+                                )
+                            }
+
+
+
+                         
+
+                        </div>
+
+                           {/* PROFILE */}
+
+                            <div
+                                className="profile-container"
+                                ref={dropdownRef}
+                            >
+
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                    className="profile-image"
+                                    alt="profile"
+                                    onClick={() =>
+                                        setShowProfileDropdown(
+                                            prev => !prev
+                                        )
+                                    }
+                                />
+
+
+                                {
+                                    showProfileDropdown && (
+
+                                        <div className="profile-dropdown">
+
+                                            <p>
+                                                {user.username}
+                                            </p>
+
+
+                                            <button
+                                                onClick={handleLogout}
+                                            >
+                                                Logout
+                                            </button>
+
+                                        </div>
+
+                                    )
+                                }
 
                             </div>
 
-                        )
-                        }
 
+                    </div> 
 
-                    </div>
+                )
+                    :
+                    (
 
+                        <div className="menu nav-links">
 
-                    </div>
+                            <Link to="/login">
+                                Login
+                            </Link>
 
+                        </div>
 
-                </div>
-
-
-            )
-            :
-            (
-
-                <div className="menu nav-links">
-
-                    <Link to="/login">
-                        Login
-                    </Link>
-
-                </div>
-
-            )
+                    )
             }
 
-
         </nav>
+
+        
 
     );
 

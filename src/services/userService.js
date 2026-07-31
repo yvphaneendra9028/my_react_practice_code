@@ -27,3 +27,30 @@ export const registerUser = (userData) => {
 export const loginUser = (userData) => {
     return apiAxios.post("/users/login", userData);
 };
+
+export const addProduct = (productData) => {
+    return apiAxios.post("/products/addProduct", productData);
+}
+export const getProduct = ()=> {
+    return apiAxios.get('/products/getAllProducts');
+}
+
+export const addPlan = (planData) => {
+    return apiAxios.post("/plans/addPlan", planData);
+}
+
+export const getPlansByProduct = async (productId) => {
+    try {
+        const response = await apiAxios.get(
+            `/plans/product/${productId}`
+        );
+
+        return response.data;
+
+    } catch (error) {
+        console.error("Get Plans By Product Error:", error);
+
+        throw error;
+    }
+};
+
