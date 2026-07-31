@@ -80,28 +80,23 @@ const loginUser = async (req, res) => {
             });
         }
             const token = generateToken(user);
-            res.cookie(
-            "token",
-            token,
-            {
-                httpOnly: true,
-                secure: true, // true in production HTTPS
-                sameSite: "strict",
-                maxAge: 60 * 60 * 1000
-            }
-        );
+            res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            maxAge: 60 * 60 * 1000
+            });
 
 
-        res.status(200).json({
-            message: "Login successful",
-            user: {
-                token: token,
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                role: user.role
-            }
-        });
+       res.status(200).json({
+    message: "Login successful",
+    user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role
+    }
+});
 
 
     }
