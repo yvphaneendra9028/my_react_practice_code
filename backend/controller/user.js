@@ -85,7 +85,7 @@ const loginUser = async (req, res) => {
             token,
             {
                 httpOnly: true,
-                secure: false, // true in production HTTPS
+                secure: true, // true in production HTTPS
                 sameSite: "strict",
                 maxAge: 60 * 60 * 1000
             }
